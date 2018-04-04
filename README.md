@@ -15,6 +15,18 @@ For files smaller than the available memory, the system should be fairly fast an
 I have used the embedded Tomcat server in Spring boot and have not altered the max-threads value.Hence the system will be able to support multiple simultaneous clients.Beyond the default number of threads (200),as specified in the server configuration, the requests to the server will be queued and hence delayed.Since I am not using a persistent data storage, very large number of users(i.e higher load) will result in fewer cache hits and larger number of I/O operations resulting in poor performance. 
 This can be increased 
 #### What documentation , websites, papers, etc did you consult in doing this assignment?
+Jersey Documentation - https://jersey.github.io/documentation/latest/index.html
+https://docs.oracle.com/javase/7/docs/api/java/io/RandomAccessFile.html
+
+StackOverflow - Lot of links
+
+Tutorials on Spring-boot, Jersey
+
 #### Third party libraries and tools used
+Maven,Spring,Jersey
 #### How long did you spend on this exercise? If you had unlimited more time tospend on this, how would you spend it and how would you prioritize each item?
+Around 10 hours. 
+If I had unlimited time, I would have investigated on how I can make the cache dynamic.
+I would have also investigated further on the use of a multilevel cache that could reduce the I/O operations further. I even wanted to try out Redis, which should be an ideal choice in a production grade system for this assignment.Even the use of a persistent data storage looks ideal.
 #### If you were to critique your code, what would you have to say about it?
+For smaller files, there is no need to create a seperate file for index and the index can be stored in-memory.For larger files, an in-memory index would not be feasible.However in the worst case the index file can be as large as original input file.(no-of-lines vs memory).
