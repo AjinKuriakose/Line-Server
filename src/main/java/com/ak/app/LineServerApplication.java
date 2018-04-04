@@ -14,6 +14,10 @@ public class LineServerApplication {
 		 * spring component. A better approach would have been to use the spring
 		 * context.
 		 */
+		if (args == null || args.length == 0) {
+			System.out.println("Specify the input file path.Exiting...");
+			return;
+		}
 		System.setProperty(LineServer.FILE_NAME, args[0]);
 		SpringApplication.run(LineServerApplication.class, args);
 	}
