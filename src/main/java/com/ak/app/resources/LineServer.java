@@ -79,8 +79,9 @@ public class LineServer {
 	 * first checks whether the requested line is already cached. If not, it finds
 	 * the corresponding line using the offset specified in the index file. The
 	 * retrieved line is then put in the LRU cache.
+	 * @throws IOException 
 	 */
-	public String getLinefromIndex(int n) {
+	public String getLinefromIndex(int n) throws IOException {
 		String line = null;
 		if (n < 1 || (len > 0 && n > len))
 			throw new IndexOutOfBoundsException();
@@ -88,18 +89,14 @@ public class LineServer {
 			//System.out.println("Cache Hit");
 			return cache.get(n);
 		}
-		try {
-			if (inputRandomAccessFile != null && indexRandomAccessFile != null) {
-				long indexPos = (long) ((n - 1) * 8);
-				indexRandomAccessFile.seek(indexPos);
+		if (inputRandomAccessFile != null && indexRandomAccessFile != null) {
+			long indexPos = (long) ((n - 1) * 8);
+			indexRandomAccessFile.seek(indexPos);
 
-				long readPos = indexRandomAccessFile.readLong();
-				inputRandomAccessFile.seek(readPos);
+			long readPos = indexRandomAccessFile.readLong();
+			inputRandomAccessFile.seek(readPos);
 
-				line = inputRandomAccessFile.readLine();
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			line = inputRandomAccessFile.readLine();
 		}
 		if (line != null)
 			cache.put(n, line);
