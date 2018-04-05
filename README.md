@@ -30,8 +30,8 @@ Maven,Spring,Jersey
 #### How long did you spend on this exercise? If you had unlimited more time tospend on this, how would you spend it and how would you prioritize each item?
 Around 10 hours. 
 If I had unlimited time, I would have investigated on how I can make the cache dynamic.
-I would have also investigated further on the use of a multilevel cache that could reduce the I/O operations further. I even wanted to try out Redis, which should be an ideal choice in a similar production grade system.Even the use of a persistent data storage looks ideal as we simply need to store a key-value pair.
+I would have also investigated further on the use of a block-level cache that could reduce the I/O operations further. I even wanted to try out Redis, which should be an ideal choice in a similar production grade system.Even the use of a persistent data storage looks ideal as we simply need to store a key-value pair.
 
 #### If you were to critique your code, what would you have to say about it?
-For smaller files, there is no need to create a seperate file for index and the index can be stored in-memory.For larger files, an in-memory index would not be feasible.However in the worst case the index file can be as large as original input file.(no-of-lines vs memory).
+For smaller files, there is no need to create a seperate file for index and the index can be stored in-memory.For larger files, an in-memory index would not be feasible.However in the worst case the index file can be as large as original input file.(no-of-lines vs length).
 My solution uses the same approach for small and large files. However , for small files the entire data would be cached during initialization and hence the index as such is not required.
